@@ -28,5 +28,5 @@ Node:
             nodeSelector
                 demoserver  "true"
 
-    - kubectl label node kworker1.kubelab.loc demoserver=true
+   -  kubectl label node kworker1.kubelab.loc demoserver="true"
 

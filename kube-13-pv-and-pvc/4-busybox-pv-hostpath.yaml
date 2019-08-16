@@ -15,3 +15,5 @@ spec:
     volumeMounts:
     - name: host-volume
       mountPath: /mydata
+  nodeSelector:
+    demoserver: "true"

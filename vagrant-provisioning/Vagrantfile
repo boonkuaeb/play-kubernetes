@@ -5,7 +5,7 @@ ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure(2) do |config|
 
-  config.vm.provision "shell", path: "bootstrap.sh"
+  # config.vm.provision "shell", path: "bootstrap.sh"
 
   # Kubernetes Master Server
   config.vm.define "kmaster" do |kmaster|
@@ -17,6 +17,7 @@ Vagrant.configure(2) do |config|
       v.memory = 2048
       v.cpus = 2
     end
+    kmaster.vm.provision "shell", path: "bootstrap.sh"
     # kmaster.vm.provision "shell", path: "bootstrap_kmaster.sh"
     kmaster.vm.provision "shell", path: "bootstrap_kmaster_calico.sh"
   end
@@ -34,8 +35,24 @@ Vagrant.configure(2) do |config|
         v.memory = 1024
         v.cpus = 1
       end
+      workernode.vm.provision "shell", path: "bootstrap.sh"
       workernode.vm.provision "shell", path: "bootstrap_kworker.sh"
     end
   end
+
+
+
+  config.vm.define "nfs-server" do |nfs_server|
+    nfs_server.vm.box = "centos/7"
+    nfs_server.vm.hostname = "nfs-server.example.com"
+    nfs_server.vm.network "private_network", ip: "172.42.42.200"
+    nfs_server.vm.provider "virtualbox" do |v|
+      v.name = "nfs-server"
+      v.memory = 1024
+      v.cpus = 1
+    end
+    nfs_server.vm.provision "shell", path: "bootstrap_nfs.sh"
+  end
+
 
 end

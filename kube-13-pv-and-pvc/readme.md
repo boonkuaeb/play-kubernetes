@@ -24,9 +24,10 @@ Access Mode :
 Node: 
 1. If not specify any node name. it will got some problem because pv type HostPath will be in the Node that the POD start
 2. Solve by :
-    - Under spec :  add  a few line below 
-            nodeSelector
-                demoserver  "true"
-
-   -  kubectl label node kworker1.kubelab.loc demoserver="true"
+   -  Under spec : add a few line below 
+   ``` 
+    nodeSelector demoserver
+      "true" 
+   ```
+   -  `kubectl label node kworker1.kubelab.loc demoserver="true"`
 

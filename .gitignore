@@ -1,2 +1,5 @@
 .idea
 kubernetes
+vagrant-provisioning/.vagrant
+kubedata
+kube-26-prometheus-monitoring/charts

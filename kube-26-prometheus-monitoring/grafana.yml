@@ -1,0 +1,7 @@
+adminPassword: password
+service:
+  type: NodePort
+  nodePort: 32302
+persistence:
+  enabled: false
+

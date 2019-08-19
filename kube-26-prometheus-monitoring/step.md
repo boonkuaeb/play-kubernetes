@@ -100,3 +100,8 @@ helm install -f grafana.yml charts/stable/grafana --name grafana --namespace gra
 
 
 ## Issue : grafana with persistence not working with nfs
+```
+helm install -f grafana.yml charts/stable/grafana --name grafana --namespace grafana
+
+```
+

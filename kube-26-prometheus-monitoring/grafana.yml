@@ -4,4 +4,3 @@ service:
   nodePort: 32302
 persistence:
   enabled: false
-

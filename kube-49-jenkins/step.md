@@ -32,3 +32,4 @@ Set Local registry to kworker1 ` vi /etc/docker/daemon.json`
 systemctl reload docker
 exit
 ```
+

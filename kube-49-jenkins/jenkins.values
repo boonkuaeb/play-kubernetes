@@ -51,7 +51,7 @@ master:
   # a restart loop.  Likewise if you disable the non-Jenkins identity store and instead use the Jenkins internal one,
   # you should revert master.adminUser to your preferred admin user:
   adminUser: "admin"
-  adminPassword: "password"
+  # adminPassword: <defaults to random>
   # adminSshKey: <defaults to auto-generated>
   # If CasC auto-reload is enabled, an SSH (RSA) keypair is needed.  Can either provide your own, or leave unconfigured to allow a random key to be auto-generated.
   # If you supply your own, it is recommended that the values file that contains your key not be committed to source control in an unencrypted format
@@ -61,11 +61,11 @@ master:
   # maxUnavailable: 25%
   resources:
     requests:
-      cpu: "1000m"
-      memory: "512Mi"
+      cpu: "50m"
+      memory: "256Mi"
     limits:
       cpu: "2000m"
-      memory: "2048Mi"
+      memory: "4096Mi"
   # Environment variables that get added to the init container (useful for e.g. http_proxy)
   # initContainerEnv:
   #   - name: http_proxy
@@ -89,7 +89,7 @@ master:
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
-  serviceType: NodePort
+  serviceType: LoadBalancer
   # Jenkins master service annotations
   serviceAnnotations: {}
   # Jenkins master custom labels
@@ -103,7 +103,6 @@ master:
   podLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
   # nodePort: <to set explicitly, choose port between 30000-32767
-  nodePort: 30301
   # Enable Kubernetes Liveness and Readiness Probes
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
   healthProbes: true
@@ -166,8 +165,6 @@ master:
     - workflow-aggregator:2.6
     - credentials-binding:1.19
     - git:3.11.0
-    - blueocean:1.18.1
-    - kubenetes-cd:2.0.0
 
   # Enable to always override the installed plugins with the values of 'master.installPlugins' on upgrade or redeployment.
   # overwritePlugins: true
@@ -356,8 +353,8 @@ master:
 
 agent:
   enabled: true
-  image: "joao29a/jnlp-slave-alpine-docker"
-  tag: "latest"
+  image: "jenkins/jnlp-slave"
+  tag: "3.27-1"
   customJenkinsLabels: []
   # name of the secret to be used for image pulling
   imagePullSecretName:
@@ -368,8 +365,8 @@ agent:
       cpu: "200m"
       memory: "256Mi"
     limits:
-      cpu: "500m"
-      memory: "512Mi"
+      cpu: "200m"
+      memory: "256Mi"
   # You may want to change this to true while testing a new image
   alwaysPullImage: false
   # Controls how agent pods are retained after the Jenkins build completes
@@ -390,9 +387,6 @@ agent:
   # - type: EmptyDir
   #   mountPath: "/var/lib/containers"
   #   memory: false
-    - type: HostPath
-      hostPath: /var/run/docker.sock
-      mountPath: /var/run/docker.sock
   nodeSelector: {}
   # Key Value selectors. Ex:
   # jenkins-agent: v1

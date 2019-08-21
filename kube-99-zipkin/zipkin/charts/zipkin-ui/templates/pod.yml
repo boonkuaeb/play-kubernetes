@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: local-zipkin-ui
+  labels:
+    app: local-zipkin-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: local-zipkin-ui
+  template:
+    metadata:
+      labels:
+        app: local-zipkin-ui
+    spec:
+      imagePullSecrets:
+        - name: dockerlogin
+      containers:
+        - name: local-zipkin-ui
+          image: openzipkin/zipkin:latest
+          ports:
+            - containerPort: 9411
+          env:
+            - name: STORAGE_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: local-zipkin-ui
+                  key: storage_type

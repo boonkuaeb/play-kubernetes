@@ -1,0 +1,29 @@
+---
+defaultImage: true
+elasticsearch:
+  image:
+    repository: "docker.elastic.co/elasticsearch/elasticsearch-oss"
+    tag: "6.2.4"
+  master:
+    replicas: 1
+    heapSize: "512m"
+    service:
+      type: "NodePort"
+    persistence:
+      enabled: false
+      storageClass: ""
+      size: "10Gi"
+kibana:
+  image:
+    repository: "docker.elastic.co/kibana/kibana-oss"
+    tag: "6.2.4"
+  ingress:
+    enabled: false
+    hosts:
+      - "xip.io"
+fluent-bit:
+  image:
+    fluent_bit:
+      repository: "fluent/fluent-bit"
+      tag: "0.13.0"
+  enabled: true

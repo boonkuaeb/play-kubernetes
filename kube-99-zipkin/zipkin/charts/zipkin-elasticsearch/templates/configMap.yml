@@ -1,0 +1,9 @@
+#db_database: 'OnePlanetV2'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-zipkin-elasticsearch
+data:
+    storage_type: 'elasticsearch'
+    es_hosts: 'elasticsearch'
+    java_opts: '-Xmx1200m -Xms768m'

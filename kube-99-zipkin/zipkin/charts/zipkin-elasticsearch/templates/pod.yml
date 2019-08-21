@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: local-zipkin-elasticsearch
+  labels:
+    app: local-zipkin-elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: local-zipkin-elasticsearch
+  template:
+    metadata:
+      labels:
+        app: local-zipkin-elasticsearch
+    spec:
+      imagePullSecrets:
+        - name: dockerlogin
+      containers:
+        - name: local-zipkin-elasticsearch
+          image: openzipkin/zipkin-elasticsearch7:latest
+          ports:
+            - containerPort: 9200
+          env:
+            - name: STORAGE_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: local-zipkin-elasticsearch
+                  key: storage_type
+            - name: ES_HOSTS
+              valueFrom:
+                configMapKeyRef:
+                  name: local-zipkin-elasticsearch
+                  key: es_hosts
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  name: local-zipkin-elasticsearch
+                  key: java_opts

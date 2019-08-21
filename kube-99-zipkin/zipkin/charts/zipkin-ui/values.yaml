@@ -1,0 +1,7 @@
+image:
+  repository: openzipkin/zipkin
+  tag: "latest"
+replicaCount: 1
+service:
+  type: NodePort
+  port: 9411

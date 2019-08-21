@@ -60,6 +60,6 @@
    Copy the secret and run command below
    
    ```
-   # kubectl describe secret dashboard-admin-token-lpcwn -n kube-system
+   # kubectl describe secret dashboard-admin-token-6qsgj -n kube-system
    kubectl describe secret {secret_name} -n kube-system
    ```

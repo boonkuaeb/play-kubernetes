@@ -1,0 +1,47 @@
+# jaeger deployment yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: jaeger-deployment
+  labels:
+    app: jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - name: jaeger-agent
+        image: jaegertracing/jaeger-agent
+        ports:
+        - containerPort: 5775
+          protocol: UDP
+        - containerPort: 5778
+        - containerPort: 6831
+          protocol: UDP
+        - containerPort: 6832
+          protocol: UDP
+        command:
+        - "/go/bin/agent-linux"
+        - "--collector.host-port=jaeger-collector.default.svc:14267"
+      - name: hw
+        image: karthequian/helloworld:latest
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jaeger-service
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: jaeger
+  ports:
+  - name: jaeger-port
+    protocol: TCP
+    port: 8080

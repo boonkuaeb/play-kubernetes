@@ -1,0 +1,7 @@
+image:
+  repository: openzipkin/zipkin-elasticsearch7
+  tag: "latest"
+replicaCount: 1
+service:
+  type: NodePort
+  port: 9200

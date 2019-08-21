@@ -1,0 +1,7 @@
+#db_database: 'OnePlanetV2'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-zipkin-ui
+data:
+    storage_type: 'elasticsearch'

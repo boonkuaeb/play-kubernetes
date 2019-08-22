@@ -373,7 +373,7 @@ agent:
   # Possible values: Always, Never, OnFailure
   podRetention: "Never"
   # You can define the volumes that you want to mount for this container
-  # Allowed types are: ConfigMap, EmptyDir, HostPath, Nfs, Pod, Secret
+  # Allowed types are: mongodb-configmap.yaml, EmptyDir, HostPath, Nfs, Pod, Secret
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
   # Pod-wide ennvironment, these vars are visible to any container in the agent pod

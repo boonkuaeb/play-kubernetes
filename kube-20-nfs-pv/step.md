@@ -6,15 +6,17 @@ systemctl enable nfs-server.service
 systemctl start nfs-server.service
 
 echo "[TASK 7] Start Create share directory"
-mkdir -p /srv/nfs/kubedata
-chown nfsnobody:nfsnobody /srv/nfs
-chmod 777 /srv/nfs/kubedata
+mkdir -p /srv/nfs/kubedata-app-alpha/alp-app-prometheus-server
+chown nfsnobody:nfsnobody /srv/nfs/kubedata-app-alpha
+chmod 777 /srv/nfs/kubedata-app-alpha/alp-app-prometheus-server
 cat >>/etc/exports<<EOF
-/srv/nfs/kubedata        *(rw,sync,no_subtree_check,insecure)
+/srv/nfs/kubedata-app-alpha/alp-app-prometheus-server       *(rw,sync,no_subtree_check,insecure)
 EOF
 exportfs -rav
 exportfs -v
 showmount -e
+
+
 ```
 
 
@@ -22,5 +24,5 @@ showmount -e
 
 3. run command 
 ```
-mount -t nfs 172.42.42.200:/srv/nfs/kubedata /mnt
+mount -t nfs 172.42.42.200:/srv/nfs/kubedata-app-alpha/alp-app-prometheus-alertmanager/prometheus-server /mnt
 ```

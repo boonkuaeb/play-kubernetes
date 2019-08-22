@@ -43,7 +43,7 @@ metadata:
   name: flannel
   namespace: kube-system
 ---
-kind: ConfigMap
+kind: mongodb-configmap.yaml
 apiVersion: v1
 metadata:
   name: kube-flannel-cfg

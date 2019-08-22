@@ -1,6 +1,6 @@
 #db_database: 'OnePlanetV2'
 apiVersion: v1
-kind: ConfigMap
+kind: mongodb-configmap.yaml
 metadata:
   name: local-zipkin-elasticsearch
 data:

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: bankofspring
+  name: bankofspring-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: bankofspring-main
+  template:
+    metadata:
+      labels:
+        run: bankofspring-main
+    spec:
+      containers:
+      - image: john3kuae/bankofspring:latest
+        name: bankofspring
+        ports:
+          - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankofspring
+  labels:
+    app: bankofspring
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: bankofspring-deployment

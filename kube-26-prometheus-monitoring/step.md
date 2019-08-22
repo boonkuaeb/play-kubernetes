@@ -37,7 +37,7 @@ helm init --service-account tiller
 
 # Install Prometheus 
 ```
-helm inspect values stable/prometheus > /tmp/prometheus.values
+helm inspect values stable/prometheus > ./prometheus.values
 ```
 
 `vi /tmp/prometheus.values` to edit 

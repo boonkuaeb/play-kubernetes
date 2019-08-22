@@ -1,0 +1,13 @@
+mkdir -p /srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0
+chown nfsnobody:nfsnobody /srv/nfs
+chmod 777 /srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0
+
+cat >>/etc/exports<<EOF
+/srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0        *(rw,sync,no_subtree_check,insecure)
+EOF
+exportfs -rav
+exportfs -v
+showmount -e
+
+
+echo "192.168.135.62"

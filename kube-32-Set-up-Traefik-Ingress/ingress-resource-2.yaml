@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-resource-2
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+
+spec:
+  rules:
+    - host: nginx.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: nginx-main-deployment
+              servicePort: 80
+          - backend:
+              serviceName: nginx-blue-deployment
+              servicePort: 80
+            path: /blue
+          - backend:
+              serviceName: bankofspring-deployment
+              servicePort: 80
+            path: /back-of-spring
+
+    - host: blue.nginx.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: nginx-blue-deployment
+              servicePort: 80
+
+
+    - host: green.nginx.example.com
+      http:
+        paths:
+          - backend:
+              serviceName: nginx-green-deployment
+              servicePort: 80

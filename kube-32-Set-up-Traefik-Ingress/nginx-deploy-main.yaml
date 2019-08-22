@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: nginx
+  name: nginx-main-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: nginx-main
+  template:
+    metadata:
+      labels:
+        run: nginx-main
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-main
+  labels:
+    app: nginx-main
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: nginx-main-deployment
+

@@ -37,7 +37,7 @@ helm init --service-account tiller
 
 # Install Prometheus 
 ```
-helm inspect values stable/prometheus > ./prometheus.values
+helm inspect values stable/prometheus > ./prometheus.values 
 ```
 
 `vi /tmp/prometheus.values` to edit 
@@ -58,12 +58,12 @@ helm inspect values stable/prometheus > ./prometheus.values
 ```
 
 ```
-helm install stable/prometheus --name prometheus --values /tmp/prometheus.values --namespace prometheus
+helm install stable/prometheus --name prometheus --values ./prometheus.values --namespace prometheus
 ```
 
 # Install Grafana
 ```
-helm inspect values stable/grafana > /tmp/grafana.values
+helm inspect values stable/grafana > ./grafana.values -n grafana
 ```
 `vi /tmp/grafana.values` to edit 
 - edit `type: NodePort`
@@ -93,15 +93,15 @@ helm inspect values stable/grafana > /tmp/grafana.values
 
 ```
 
-# helm install stable/grafana --name grafana --values /tmp/grafana.values --namespace grafana
 
-helm install -f grafana.yml charts/stable/grafana --name grafana --namespace grafana
+helm install stable/grafana --name grafana --values ./grafana.values --namespace grafana
+
 ```
 
 
 ## Issue : grafana with persistence not working with nfs
 ```
-helm install -f grafana.yml charts/stable/grafana --name grafana --namespace grafana
+helm install -f grafana.values charts/stable/grafana --name grafana --namespace grafana
 
 ```
 

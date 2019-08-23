@@ -29,7 +29,7 @@ systemctl status haproxy
 
 ```
 
-# Install Ingress Controller
+# Install traefik Ingress Controller
 
 [install Ingress Controllers](https://docs.traefik.io/user-guide/kubernetes/)
 [examples k8s ](https://github.com/containous/traefik/tree/v1.7/examples/k8s)
@@ -51,28 +51,43 @@ kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examp
 kubectl get all -n kube-system | grep traefik
 ```
 
+
+
 # Deploy sample Application
 ```
-kubectl apply -f nginx-deploy-blue.yaml -f nginx-deploy-green.yaml -f nginx-deploy-main.yaml -f spring-boot-admin.yaml
+kubectl create namespace demo-traefik
+```
+
+```
+kubectl apply -f nginx-deploy-blue.yaml -f nginx-deploy-green.yaml -f nginx-deploy-main.yaml -f backofspring.yaml --namespace demo-traefik
 ```
 
 # Create ingress service
 ```
-kubectl apply -f ingress-resource-2.yaml
+kubectl apply -f ingress-resource.yaml --namespace demo-traefik
 ```
 
 ```
-kubectl get ing
+kubectl get ing --namespace demo-traefik && kubectl describe ing ingress-resource --namespace demo-traefik
 ```
 
 ```
-kubectl describe ing ingress-resource-2
+kubectl expose deployment bankofspring-deployment --port=80 --target-port=8080 --namespace demo-traefik 
+
+kubectl expose deployment nginx-blue-deployment --port=80 --target-port=80 --namespace demo-traefik
+
+kubectl expose deployment nginx-green-deployment --port=80 --target-port=80 --namespace demo-traefik
+
+kubectl expose deployment nginx-main-deployment --port=80 --target-port=80 --namespace demo-traefik
+
+
 ```
 
 
+```
+kubectl get ing --namespace demo-traefik && kubectl describe ing ingress-resource --namespace demo-traefik
 
-
-
+```
 
 
 

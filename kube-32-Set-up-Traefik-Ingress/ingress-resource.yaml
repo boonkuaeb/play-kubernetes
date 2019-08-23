@@ -22,6 +22,11 @@ spec:
               serviceName: bankofspring-deployment
               servicePort: 80
             path: /back-of-spring
+          - backend:
+              serviceName: nginx-green-deployment
+              servicePort: 80
+            path: /blue/green
+
 
     - host: blue.nginx.example.com
       http:

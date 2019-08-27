@@ -23,7 +23,7 @@
    kubectl -n kube-system get pods -o wide
    ```
 3. dashboard.yaml 
-   -  create Secret call `kubebernetes-dashboard-certs`
+   - create Secret call `kubebernetes-dashboard-certs`
    - create ServiceAccount call `kubebernetes-dashboard`
    - create Role call `kubebernetes-dashboard-minimal`. This role just
      define. What the user can do ?

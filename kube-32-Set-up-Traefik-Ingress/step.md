@@ -42,8 +42,11 @@ kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examp
 kubectl describe clusterrole traefik-ingress-controller -n kube-system
 ```
 
+```
+kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/ui.yaml
+```
 
-### Deploy deamonset 
+### Deploy daemon set 
 ```
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
 ```

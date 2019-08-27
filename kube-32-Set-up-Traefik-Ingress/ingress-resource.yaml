@@ -27,6 +27,10 @@ spec:
               servicePort: 80
             path: /blue/green
 
+          - path: /traefik-web-ui
+            backend:
+              serviceName: traefik-web-ui
+              servicePort: 80
 
     - host: blue.nginx.example.com
       http:
@@ -36,7 +40,7 @@ spec:
               servicePort: 80
 
 
-    - host: green.nginx.example.com
+    - host: green.nginx.example.com/*
       http:
         paths:
           - backend:

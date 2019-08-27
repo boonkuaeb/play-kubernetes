@@ -6,11 +6,11 @@ systemctl enable nfs-server.service
 systemctl start nfs-server.service
 
 echo "[TASK 7] Start Create share directory"
-mkdir -p /srv/nfs/kubedata-app-alpha/alp-app-prometheus-server
+mkdir -p /srv/nfs/devops/jenkins
 chown nfsnobody:nfsnobody /srv/nfs/kubedata-app-alpha
-chmod 777 /srv/nfs/kubedata-app-alpha/alp-app-prometheus-server
+chmod 777 /srv/nfs/devops/jenkins
 cat >>/etc/exports<<EOF
-/srv/nfs/kubedata-app-alpha/alp-app-prometheus-server       *(rw,sync,no_subtree_check,insecure)
+/srv/nfs/devops/jenkins       *(rw,sync,no_subtree_check,insecure)
 EOF
 exportfs -rav
 exportfs -v

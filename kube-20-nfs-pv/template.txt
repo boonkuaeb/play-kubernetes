@@ -1,13 +1,11 @@
-mkdir -p /srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0
+mkdir -p /srv/nfs/devops/prometheus-server
 chown nfsnobody:nfsnobody /srv/nfs
-chmod 777 /srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0
+chmod 777 /srv/nfs/devops/prometheus-server
 
 cat >>/etc/exports<<EOF
-/srv/nfs/kubedata/devops/efk/es-master-efk-cluster-default-0        *(rw,sync,no_subtree_check,insecure)
+/srv/nfs/devops/prometheus-server        *(rw,sync,no_subtree_check,insecure,root_squash)
 EOF
 exportfs -rav
 exportfs -v
 showmount -e
 
-
-echo "192.168.135.62"

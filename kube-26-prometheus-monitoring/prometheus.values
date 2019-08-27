@@ -643,13 +643,13 @@ server:
   ingress:
     ## If true, Prometheus server Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## Prometheus server Ingress annotations
     ##
     annotations: {}
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: 'true'
+    kubernetes.io/ingress.class: traefik
+    kubernetes.io/tls-acme: 'true'
 
     ## Prometheus server Ingress additional labels
     ##
@@ -659,7 +659,7 @@ server:
     ## Must be provided if Ingress is enabled
     ##
     hosts: []
-    #   - prometheus.domain.com
+      - dev-prometheus.oneplanets.com
     #   - domain.com/prometheus
 
     ## Prometheus server Ingress TLS configuration
@@ -820,8 +820,7 @@ server:
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
     servicePort: 80
-    nodePort: 32301
-    type: NodePort
+    type: ClusterIP
 
   ## Prometheus server pod termination grace period
   ##

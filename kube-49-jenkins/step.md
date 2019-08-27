@@ -33,3 +33,7 @@ systemctl reload docker
 exit
 ```
 
+```
+helm install stable/jenkins --name jenkins --values ./jenkins.values --namespace jenkins
+```
+

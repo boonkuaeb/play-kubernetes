@@ -132,6 +132,7 @@ metadata:
 spec:
   ports:
   - port: 9200
+    name: elasticsearch-logging
     protocol: TCP
     targetPort: db
   selector:
@@ -312,6 +313,6 @@ spec:
   - port: 5601
     protocol: TCP
     targetPort: ui
+    name: kibana-logging
   selector:
     k8s-app: kibana-logging
-  type: LoadBalancer
